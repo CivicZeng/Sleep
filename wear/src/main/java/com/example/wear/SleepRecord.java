@@ -1,7 +1,5 @@
 package com.example.wear;
 
-import java.util.Date;
-
 public class SleepRecord {
     private long date;
     private double fws, fas, sws;

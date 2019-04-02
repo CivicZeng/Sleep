@@ -1,16 +1,11 @@
 package com.example.wear;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-
-import com.example.wear.database.SleepBaseHelper;
-import com.example.wear.database.SleepDbSchema;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
@@ -21,7 +16,6 @@ public class SensorData {
     private SensorManager sensorManager;
     private Sensor accelSensor, gyroSensor, magnSeneor, heartRate;
     private SleepRecord sleepRecord;
-    private SQLiteDatabase mDataBase;
     private DecimalFormat decimalFormat = new DecimalFormat("##.00%");
     private double[] accelValue = new double[3];
     private double[] gyroValue = new double[3];
@@ -125,8 +119,6 @@ public class SensorData {
         sensorManager.registerListener(listener, accelSensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(listener, gyroSensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(listener, magnSeneor, SensorManager.SENSOR_DELAY_UI);
-
-        mDataBase = new SleepBaseHelper(context).getWritableDatabase();
     }
 
     public void startHeartReader() {
@@ -148,7 +140,7 @@ public class SensorData {
         sleepRecord = new SleepRecord(startTime);
     }
 
-    public void endRecord() {
+    public void endRecord(Context context) {
         switch (sleepState) {
             case "fws":
                 fws += System.currentTimeMillis() - sleepTime;
@@ -160,14 +152,14 @@ public class SensorData {
                 sws += System.currentTimeMillis() - sleepTime;
                 break;
         }
+
         sleepRecord.setFws(fws);
         sleepRecord.setFas(fas);
         sleepRecord.setSws(sws);
         sleepRecord.setHeartRate((int) heartRateValue);
         Log.d(TAG, String.valueOf(fws) + " " + String.valueOf(fas) + " " + String.valueOf(sws));
-        ContentValues values = getContentValues(sleepRecord);
-        mDataBase.insert(SleepDbSchema.SleepTable.NAME, null, values);
-        Log.d(TAG, "insert complete");
+
+        SleepRecordManager.get(context).addRecord(sleepRecord);
         std = 0;
         list.clear();
         recording = false;
@@ -179,16 +171,6 @@ public class SensorData {
                 + "\n中度睡眠： " + String.valueOf(decimalFormat.format(sleepRecord.getFas() / sum))
                 + "\n深度睡眠： " + String.valueOf(decimalFormat.format(sleepRecord.getSws() / sum))
                 + "\n心率: " + String.valueOf(sleepRecord.getHeartRate());
-    }
-
-    private ContentValues getContentValues(SleepRecord sleepRecord) {
-        ContentValues values = new ContentValues();
-        values.put(SleepDbSchema.SleepTable.Cols.DATE, sleepRecord.getDate());
-        values.put(SleepDbSchema.SleepTable.Cols.FWS, sleepRecord.getFws());
-        values.put(SleepDbSchema.SleepTable.Cols.FAS, sleepRecord.getFas());
-        values.put(SleepDbSchema.SleepTable.Cols.SWS, sleepRecord.getSws());
-        values.put(SleepDbSchema.SleepTable.Cols.HEARTRATE, sleepRecord.getHeartRate());
-        return values;
     }
 
     public void destroy() {
