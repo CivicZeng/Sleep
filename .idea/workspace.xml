@@ -14,35 +14,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff6e8aaa-6345-4f2e-998a-353839b724b6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/HistoryActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/RecordActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/SleepRecordManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/drawable/history_button_shape.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/drawable/history_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/drawable/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/drawable/settings_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/drawable/start.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/layout/history_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/layout/list_item_record.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/layout/main_activity.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wear/src/main/res/layout/record_pager_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sleep.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Sleep.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/wear/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wear/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/SensorData.java" beforeDir="false" afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/SensorData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/SleepRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/wear/src/main/java/com/example/wear/SleepRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wear/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wear/wear.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wear/wear.iml" afterDir="false" />
-    </list>
+    <list default="true" id="ff6e8aaa-6345-4f2e-998a-353839b724b6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/HistoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="1515">
+              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,11 +133,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/RecordActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -502,7 +474,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1100" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23801917" />
@@ -728,16 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/HistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/SleepRecordManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
@@ -759,8 +720,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/RecordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wear/src/main/java/com/example/wear/HistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1515">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
