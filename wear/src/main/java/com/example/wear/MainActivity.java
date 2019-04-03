@@ -110,9 +110,9 @@ public class MainActivity extends WearableActivity {
                 case 0:
                     return "SLEEP";
                 case 1:
-                    return "ALARM";
-                case 2:
                     return "HISTORY";
+                case 2:
+                    return "ALARM";
                 default:
                     return null;
             }
@@ -125,9 +125,9 @@ public class MainActivity extends WearableActivity {
                 case 0:
                     return getDrawable(R.drawable.sleep_icon);
                 case 1:
-                    return getDrawable(R.drawable.alarm_icon);
-                case 2:
                     return getDrawable(R.drawable.history_icon);
+                case 2:
+                    return getDrawable(R.drawable.alarm_icon);
                 default:
                     return null;
             }
@@ -143,21 +143,22 @@ public class MainActivity extends WearableActivity {
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment, "HOMEFRAGMENT").commit();
                     break;
                 case 1:
-                    if (alarmFragment == null)
-                        alarmFragment = new AlarmFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, alarmFragment, "CONTACTFRAGMENT").commit();
-                    break;
-                case 2:
                     if (historyFragment == null)
                         historyFragment = new HistoryFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, historyFragment, "MAPFRAGMENT").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, historyFragment, "HISTORYFRAGMENT").commit();
+                    break;
+                case 2:
+                    if (alarmFragment == null)
+                        alarmFragment = new AlarmFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, alarmFragment, "ALARMFRAGMENT").commit();
                     break;
             }
         }
 
         @Override
         public int getCount() {
-            return 3;
+//            return 3;
+            return 2;
         }
     }
 }
