@@ -89,10 +89,11 @@ public class SensorData {
                         sleepTime = System.currentTimeMillis();
                     }
                 }
+                list.removeLast();
             } else {
                 std = Math.sqrt((Math.pow(std, 2) * (list.size() - 1) + Math.pow(magnValue[0], 2)) / list.size());
             }
-//            Log.d(TAG, "sensor std: " + String.valueOf(std));
+            Log.d(TAG, "sensor std: " + String.valueOf(std));
 //            Log.d(TAG, String.valueOf(lightValue));
         }
 

@@ -97,12 +97,6 @@ public class MainActivity extends WearableActivity {
     }
 
     private final class NavigationAdapter extends WearableNavigationDrawer.WearableNavigationDrawerAdapter {
-//        private final Context mContext;
-//
-//        NavigationAdapter(Context context) {
-//            mContext = context;
-//        }
-
         @Override
         public String getItemText(int i) {
             Log.d(TAG, "getItemTextId: " + String.valueOf(i));
