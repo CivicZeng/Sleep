@@ -53,6 +53,9 @@ public class SleepRecordManager {
         } finally {
             cursorWrapper.close();
         }
+        if (count == 0) {
+            addDefaultRecord();
+        }
         return count;
     }
 
@@ -77,5 +80,8 @@ public class SleepRecordManager {
                 null
         );
         return new SleepCursorWrapper(cursor);
+    }
+
+    private void addDefaultRecord() {
     }
 }

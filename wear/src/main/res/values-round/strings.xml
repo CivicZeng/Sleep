@@ -1,9 +1,3 @@
 <resources>
-    <string name="accelerator">accelerator</string>
-    <string name="gyroscope">gyroscope</string>
-    <string name="magnetometer">magnetometer</string>
-    <string name="frequency">frequency</string>
-    <string name="sleep">sleep</string>
-    <string name="wake_up">wake up</string>
     <string name="permission_denied">permission denied!</string>
 </resources>

@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Sleep</string>
-    <string name="sub_activity">History</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="accelerator">accelerator</string>
-    <string name="gyroscope">gyroscope</string>
-    <string name="magnetometer">magnetometer</string>
-    <string name="frequency">frequency</string>
     <string name="sleep">sleep</string>
     <string name="wake_up">wake up</string>
     <string name="permission_denied">permission denied!</string>
+    <string name="heart_rate">心跳频率</string>
+    <string name="snoring">鼾声</string>
+    <string name="light">光照</string>
+    <string name="accelerator">加速度计</string>
+    <string name="no_data">--</string>
 </resources>

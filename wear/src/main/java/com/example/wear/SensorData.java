@@ -13,14 +13,16 @@ import java.util.LinkedList;
 public class SensorData {
     private static final String TAG = "SensorData";
 
+    private static SensorData mSensorData;
+
     private SensorManager sensorManager;
-    private Sensor accelSensor, gyroSensor, magnSeneor, heartRate;
+    private Sensor accelSensor, gyroSensor, magnSeneor, heartRate, lightSensor;
     private SleepRecord sleepRecord;
     private DecimalFormat decimalFormat = new DecimalFormat("##.00%");
     private double[] accelValue = new double[3];
     private double[] gyroValue = new double[3];
     private double[] magnValue = new double[3];
-    private double heartRateValue;
+    private double heartRateValue, lightValue;
     public double std = 0;
     public boolean recording = false;
     private String sleepState = "fws";
@@ -47,6 +49,9 @@ public class SensorData {
                     magnValue[0] = event.values[0];
                     magnValue[1] = event.values[1];
                     magnValue[2] = event.values[2];
+                    break;
+                case Sensor.TYPE_LIGHT:
+                    lightValue = event.values[0];
                     break;
             }
             list.add(new double[]{accelValue[0], accelValue[1], accelValue[2], gyroValue[0], gyroValue[1], gyroValue[2], magnValue[0], magnValue[1], magnValue[2], System.currentTimeMillis()});
@@ -88,6 +93,7 @@ public class SensorData {
                 std = Math.sqrt((Math.pow(std, 2) * (list.size() - 1) + Math.pow(magnValue[0], 2)) / list.size());
             }
 //            Log.d(TAG, "sensor std: " + String.valueOf(std));
+//            Log.d(TAG, String.valueOf(lightValue));
         }
 
         @Override
@@ -109,16 +115,37 @@ public class SensorData {
         }
     };
 
+    public static SensorData get(Context context) {
+        if (mSensorData == null) {
+            mSensorData = new SensorData(context);
+        }
+        return mSensorData;
+    }
+
     public SensorData(Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         magnSeneor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         heartRate = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         sensorManager.registerListener(listener, accelSensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(listener, gyroSensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(listener, magnSeneor, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(listener, lightSensor, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    public double getStd() {
+        return std;
+    }
+
+    public double getHeartRateValue() {
+        return heartRateValue;
+    }
+
+    public double getLightValue() {
+        return lightValue;
     }
 
     public void startHeartReader() {
@@ -163,14 +190,6 @@ public class SensorData {
         std = 0;
         list.clear();
         recording = false;
-    }
-
-    public String sleepResult() {
-        double sum = sleepRecord.getFws() + sleepRecord.getFas() + sleepRecord.getSws();
-        return "浅度睡眠： " + String.valueOf(decimalFormat.format(sleepRecord.getFws() / sum))
-                + "\n中度睡眠： " + String.valueOf(decimalFormat.format(sleepRecord.getFas() / sum))
-                + "\n深度睡眠： " + String.valueOf(decimalFormat.format(sleepRecord.getSws() / sum))
-                + "\n心率: " + String.valueOf(sleepRecord.getHeartRate());
     }
 
     public void destroy() {

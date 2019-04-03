@@ -1,15 +1,16 @@
 package com.example.wear;
 
-import android.content.Intent;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.txusballesteros.widgets.FitChart;
@@ -18,23 +19,38 @@ import com.txusballesteros.widgets.FitChartValue;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class HistoryActivity extends WearableActivity {
-    private static final String TAG = "HistoryActivity";
+public class HistoryFragment extends Fragment {
+    private static final String TAG = "HistoryFragment";
 
     private RecyclerView recyclerView;
     private RecordAdapter recordAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_list);
-
-        setAmbientEnabled();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.history_list, container, false);
 
         recordAdapter = new RecordAdapter();
-        recyclerView = (RecyclerView) findViewById(R.id.history_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = (RecyclerView) view.findViewById(R.id.history_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recordAdapter);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private class RecordHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener {
@@ -67,7 +83,7 @@ public class HistoryActivity extends WearableActivity {
         @Override
         public void onClick(View view) {
             //TODO detailed record
-//            Intent intent = new Intent(HistoryActivity.this, RecordActivity.class);
+//            Intent intent = new Intent(HistoryFragment.this, RecordActivity.class);
 //            startActivity(intent);
         }
     }
@@ -81,7 +97,7 @@ public class HistoryActivity extends WearableActivity {
         @Override
         public RecordHolder onCreateViewHolder(@NonNull ViewGroup container, int i) {
             Log.d(TAG, "create view holder");
-            LayoutInflater inflater = LayoutInflater.from(HistoryActivity.this);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             View view = inflater.inflate(R.layout.list_item_record, container, false);
             return new RecordHolder(view);
         }
@@ -93,8 +109,7 @@ public class HistoryActivity extends WearableActivity {
 
         @Override
         public int getItemCount() {
-//            Log.d(TAG, getParent().toString());
-//            return SleepRecordManager.get(getParent()).getRecordCount();
+//            return SleepRecordManager.get(getContext()).getRecordCount();
             return 5;
         }
     }

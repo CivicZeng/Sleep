@@ -30,4 +30,5 @@ dependencies {
     compileOnly 'com.google.android.wearable:wearable:2.4.0'
 
     implementation 'com.txusballesteros:FitChart:1.0'
+    implementation files('libs/musicg-1.4.2.0.jar')
 }

@@ -3,10 +3,12 @@ package com.example.wear;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.view.drawer.WearableNavigationDrawer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +21,16 @@ public class MainActivity extends WearableActivity {
     private static final String[] permissions = new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.BODY_SENSORS,
+            Manifest.permission.RECORD_AUDIO
     };
 
-    private SensorData sensorData;
     private Button startButton;
     private TextView text;
     private Button historyButton;
+    private WearableNavigationDrawer mWearableNavigationDrawer;
+    private HomeFragment homeFragment;
+    private AlarmFragment alarmFragment;
+    private HistoryFragment historyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,36 +44,45 @@ public class MainActivity extends WearableActivity {
         // Enables Always-on
         setAmbientEnabled();
 
-        sensorData = new SensorData(this);
+        mWearableNavigationDrawer = (WearableNavigationDrawer) findViewById(R.id.top_navigation_drawer);
+        mWearableNavigationDrawer.setAdapter(new NavigationAdapter());
 
-        startButton = (Button) findViewById(R.id.start_button);
-        text = (TextView) findViewById(R.id.text);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO start recording
-                if (sensorData.recording) {
-                    startButton.setBackground(getResources().getDrawable(R.drawable.start));
-                    text.setText(R.string.sleep);
-                    sensorData.endRecord(MainActivity.this);
-                } else {
-                    startButton.setBackground(getResources().getDrawable(R.drawable.pause));
-                    text.setText(R.string.wake_up);
-                    sensorData.startRecord();
-                }
-            }
-        });
+        homeFragment = new HomeFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
 
-        historyButton = (Button) findViewById(R.id.history_button);
-        historyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO start history activity
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
-        Log.d(TAG, this.toString());
+//        startButton = (Button) findViewById(R.id.start_button);
+//        text = (TextView) findViewById(R.id.text);
+//        startButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO start recording
+//                if (sensorData.recording) {
+//                    startButton.setBackground(getResources().getDrawable(R.drawable.start));
+//                    text.setText(R.string.sleep);
+//                    sensorData.endRecord(MainActivity.this);
+//                } else {
+//                    startButton.setBackground(getResources().getDrawable(R.drawable.pause));
+//                    text.setText(R.string.wake_up);
+//                    sensorData.startRecord();
+//                }
+//            }
+//        });
+//
+//        historyButton = (Button) findViewById(R.id.history_button);
+//        historyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO start history activity
+//                Intent intent = new Intent(MainActivity.this, HistoryFragment.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SensorData.get(this).destroy();
     }
 
     @Override
@@ -78,6 +93,71 @@ public class MainActivity extends WearableActivity {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private final class NavigationAdapter extends WearableNavigationDrawer.WearableNavigationDrawerAdapter {
+//        private final Context mContext;
+//
+//        NavigationAdapter(Context context) {
+//            mContext = context;
+//        }
+
+        @Override
+        public String getItemText(int i) {
+            Log.d(TAG, "getItemTextId: " + String.valueOf(i));
+            switch (i) {
+                case 0:
+                    return "SLEEP";
+                case 1:
+                    return "ALARM";
+                case 2:
+                    return "HISTORY";
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public Drawable getItemDrawable(int i) {
+            Log.d(TAG, "getItemDrawable: " + String.valueOf(i));
+            switch (i) {
+                case 0:
+                    return getDrawable(R.drawable.sleep_icon);
+                case 1:
+                    return getDrawable(R.drawable.alarm_icon);
+                case 2:
+                    return getDrawable(R.drawable.history_icon);
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public void onItemSelected(int i) {
+            Log.d(TAG, "onItemSelected: " + String.valueOf(i));
+            switch (i) {
+                case 0:
+                    if (homeFragment == null)
+                        homeFragment = new HomeFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment, "HOMEFRAGMENT").commit();
+                    break;
+                case 1:
+                    if (alarmFragment == null)
+                        alarmFragment = new AlarmFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, alarmFragment, "CONTACTFRAGMENT").commit();
+                    break;
+                case 2:
+                    if (historyFragment == null)
+                        historyFragment = new HistoryFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, historyFragment, "MAPFRAGMENT").commit();
+                    break;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
         }
     }
 }
